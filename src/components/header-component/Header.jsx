@@ -5,13 +5,13 @@ import mealsImage from '../../assets/meals.jpeg'
 import classes from './header-styles.module.scss'
 import HeaderButton from "../header-button-component/HeaderButton"
 
-const Header = ()=>{
+const Header = (props)=>{
 
     return ( 
         <>
          <header className={classes.header}>
             <h1> RactMeals </h1>
-            <HeaderButton/>
+            <HeaderButton onClick = {props.onShowCart} />
          </header>
          
          <div className={classes['main-image']}>
