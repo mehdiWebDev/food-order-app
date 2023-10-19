@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React,{useContext,useState} from "react";
 import classes from "./cart-styles.module.scss";
 import Modal from "../UI/Modal-component/Modal";
 import cartContext from "../../context/cart-context/Cart-context";
@@ -6,6 +6,13 @@ import CartItem from "./CartItem";
 const Cart = (props) => {
 
   const cartCtx = useContext(cartContext);
+
+  const [showOrderForm,setShowOrderForm] = useState(false);
+
+
+  const handleShowOrderform = () => {
+    setShowOrderForm(true);
+  }
 
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
@@ -34,7 +41,9 @@ const Cart = (props) => {
       </div>
       <div className={classes.actions}> 
         <button className={classes["button--alt"]} onClick={props.onClose}> Close </button>
-       { hasItems && <button className={classes.button}> Order </button>  } 
+       { hasItems && <button className={classes.button} onClick={handleShowOrderform}> Order </button>  } 
+
+       { showOrderForm && <div> Order Form </div> }
       </div>
     </Modal>
   );
