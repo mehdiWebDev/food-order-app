@@ -60,6 +60,15 @@ const cartReducer = (state,action)=>{
         }
 
     }
+
+    if(action.type === 'CLEAR'){
+        const updatedItems = [];
+        const updatedTotalAmount = 0;
+        return {
+            items:updatedItems,
+            totalAmount:updatedTotalAmount
+        }
+    }
   
     return defaultCartState;
 
@@ -80,13 +89,18 @@ export const CartProvider = ({children})=> {
         dispatchCartAction({type:'REMOVE',id:id})
     }
 
+    const clearCartHandler = ()=>{
+        dispatchCartAction({type:'CLEAR'})
+    }
+
 
     return <cartContex.Provider 
             value={{
                 items:cartState.items,
                 totalAmount:cartState.totalAmount,
                 addItemToCartHandler,
-                removeItemFromCartHandler                                                    
+                removeItemFromCartHandler,
+                clearCartHandler                                                   
             }} >
             {children}
           </cartContex.Provider>
